@@ -1,30 +1,47 @@
 import string
+
+def shift_digit(digit):
+    if int(digit) + 5 > 9:
+         return(str(int(digit) - 5))
+    else:
+        return(str(int(digit) + 5))
+
+def shift_letter(letter):
+    if letter.isupper() == True:
+        if (ord(letter) + 13) > 90:
+            return(chr((ord(letter) - 13)))
+        else:
+            return(chr((ord(letter) + 13)))
+    elif letter.islower() == True:
+        if (ord(letter) + 13) > 122:
+            return(chr((ord(letter) - 13)))
+        else:
+            return(chr((ord(letter) + 13)))
+
 def crypt13(string):
     """This decrypts and encrypts string using ROT 13.5"""
-    new_char=''
     out=''
     for i in string:
         if i.isalpha() == True:
-            if i.isupper() == True:
-                if (ord(i)+13) > 90:
-                    new_char = chr((ord(i)-13))
-                else:
-                    new_char = chr((ord(i) + 13))
-            elif i.islower() == True:
-                if (ord(i)+13) > 122:
-                    new_char = chr((ord(i)-13))
-                else:
-                    new_char = chr((ord(i) + 13))
+            out+=shift_letter(i)
         elif i.isdigit() == True:
-            if int(i)+5 > 9:
-                new_char=str(int(i)-5)
-            else:
-                new_char=str(int(i)+5)
+            out+=shift_digit(i)
         else:
-            new_char=i
-        out=out+str(new_char)
+            out+=str(i)
+
     print(out)
 
+def menu():
+    active = True
+    while active == True:
+        user_input = input("\ninput the string to be encrypted/decrypted \n")
+        crypt13(user_input)
+        cont = input("\nwould you like to do another? (yes/no) \n")
+        if cont == "no":
+            print("\nGoodbye!")
+            active = False
+        elif cont != "yes":
+            print("Please select yes or no \n")
+
 #main
-user_input = input("input the string to be encrypted/decrypted \n")
-crypt13(user_input)
+menu()
