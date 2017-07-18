@@ -1,12 +1,15 @@
 import string
 
 def shift_digit(digit):
+    """Shifts the number 5 positions forward or if the sum is over 9, 5 positions backward"""
     if int(digit) + 5 > 9:
          return(str(int(digit) - 5))
     else:
         return(str(int(digit) + 5))
 
 def shift_letter(letter):
+    """this shifts the letter 13 positions forward or in the case of going over z 13 backward"""
+    #this uses ord and chr to perform the letter shift
     if letter.isupper() == True:
         if (ord(letter) + 13) > 90:
             return(chr((ord(letter) - 13)))
@@ -32,6 +35,7 @@ def crypt13(string):
     print(out)
 
 def menu():
+    """This starts the main menu"""
     active = True
     while active == True:
         user_input = input("\ninput the string to be encrypted/decrypted \n")
